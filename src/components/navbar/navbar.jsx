@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import logo from '@/components/assets/Logo.png';
 import Link from 'next/link';
-import { CatIcon } from 'lucide-react';
+import CartIcon from '@/icon/cart';
 import FavoriteIcon from '@/icon/favouriteIcon';
 import SignIn from '../auth/index';
 const Navbar = () => {
@@ -13,7 +13,7 @@ const Navbar = () => {
   ];
   return (
     <>
-      <div className='grid grid-cols-3'>
+      <div className='grid grid-cols-3 mx-32'>
         <section className='flex items-center gap-2'>
           <div>
             <Image
@@ -39,7 +39,7 @@ const Navbar = () => {
             <span>favourite</span>
           </div>
           <div className='flex items-center '>
-            <CatIcon size='24' />
+            <CartIcon size='24' />
             <span>Cart</span>
           </div>
           <div>
