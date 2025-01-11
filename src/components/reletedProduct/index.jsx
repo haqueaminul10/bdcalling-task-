@@ -1,5 +1,11 @@
+import { useCart } from '@/pages/api/CartContext';
 import { Button } from '../ui/button';
+
 const ReletedProduct = ({ relatedProducts }) => {
+  const { addToCart } = useCart();
+  const handleAddToCart = (product) => {
+    addToCart(product, 1);
+  };
   return (
     <>
       <div className='flex justify-center'>
@@ -46,8 +52,11 @@ const ReletedProduct = ({ relatedProducts }) => {
                 ${relatedProduct.price.toFixed(2)}/kg
               </p>
 
-              <Button className='mt-4 w-full bg-white text-black py-2 rounded-lg hover:bg-[#ff6a19] hover:text-white transition duration-200'>
-                View Details
+              <Button
+                className='mt-4 w-full bg-white text-black py-2 rounded-lg hover:bg-[#ff6a19] hover:text-white transition duration-200'
+                onClick={() => handleAddToCart(relatedProduct)}
+              >
+                Add to Cart
               </Button>
             </div>
           ))}

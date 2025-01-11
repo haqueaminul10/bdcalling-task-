@@ -1,9 +1,9 @@
-import bgimf from '../assets/AboutFreshHarvest.png';
+import bgimf from '../../../public/assets/AboutFreshHarvest.png';
 import { Button } from '../ui/button';
-import leaf from '../assets/leaf.png';
+import leaf from '../../../public/assets/leaf.png';
 import Image from 'next/image';
-import logo from '../assets/Logo.png';
-import janina from '../assets/16.png';
+import logo from '../../../public/assets/Logo.png';
+import janina from '../../../public/assets/16.png';
 const AboutFreshHarvest = () => {
   return (
     <>

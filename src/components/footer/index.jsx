@@ -1,11 +1,13 @@
-import logo from '@/components/assets/Logo.png';
+import logo from '../../../public/assets/Logo.png';
 import GmailIcon from '@/icon/gmailIcon';
 import LocationIcon from '@/icon/locationIcon';
 import PhoneIcon from '@/icon/phoneIcone';
 import Image from 'next/image';
-import visa from '@/components/assets/Visa.png';
-import apay from '@/components/assets/ApplePay.png';
-import paypal from '@/components/assets/Paypal.png';
+import visa from '../../../public/assets/Visa.png';
+import apay from '../../../public/assets/ApplePay.png';
+import paypal from '../../../public/assets/Paypal.png';
+import appStore from '../../../public/assets/appstore.png';
+import gplay from '../../../public/assets/googleplay.png';
 const Footer = () => {
   return (
     <div className='bg-[#f4f6f6] '>
@@ -20,6 +22,11 @@ const Footer = () => {
 
               <h3 className='text-[26px] font-semibold'> Fresh Harvests</h3>
             </div>
+          </div>
+          <p className='mt-6'>Download App</p>
+          <div className='my-4 flex gap-2'>
+            <Image src={appStore} alt='' height={40} width={138} />
+            <Image src={gplay} alt='' height={40} width={138} />
           </div>
         </section>
         <section>

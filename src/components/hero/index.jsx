@@ -10,14 +10,14 @@ import gplay from '../../../public/assets/googleplay.png';
 const Hero = () => {
   return (
     <div className='relative mb-12'>
-      <div className='absolute top-[10%] left-[90%]'>
+      <div className='absolute top-[12%] left-[90%]'>
         <Image src={leaf} alt='' height={190} width={190} />
       </div>
-      <div className='absolute top-[10%] left-[45%]'>
+      <div className='absolute top-[12%] left-[45%]'>
         <Image src={leaf} alt='' height={90} width={100} />
       </div>
-      <div className='flex justify-between'>
-        <section className='w-2/3 bg-[#efefef] px-32 py-20 '>
+      <div className='flex justify-between '>
+        <section className='w-2/3 bg-[#efefef] px-32 py-28   '>
           <Button
             variant='outline '
             className='text-[#749b3f] border border-gray-400 hover:bg-gray-200'
@@ -64,7 +64,7 @@ const Hero = () => {
         </section>
         <section className='w-1/2 bg-[#749b3f]'></section>
       </div>
-      <div className='absolute top-[5%] left-[40%]'>
+      <div className='absolute top-[11%] left-[40%]'>
         <Image src={baby} height={650} width={750} />
       </div>
     </div>

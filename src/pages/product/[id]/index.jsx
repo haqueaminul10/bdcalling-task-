@@ -3,9 +3,11 @@ import FavoriteIcon from '@/icon/favouriteIcon';
 import { Button } from '@/ui/button';
 import { useState } from 'react';
 import ReletedProduct from '@/components/reletedProduct/index';
+import { useCart } from '@/pages/api/CartContext';
 
 const ProductDetails = ({ product, categoryName, relatedProducts }) => {
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
   const handleDecrement = () => {
     if (quantity > 1) {
@@ -16,10 +18,12 @@ const ProductDetails = ({ product, categoryName, relatedProducts }) => {
   const handleIncrement = () => {
     setQuantity(quantity + 1);
   };
-
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+  };
   return (
     <>
-      <div className='mx-32 my-12 flex gap-12'>
+      <div className='mx-32 my-32 flex gap-12'>
         <section className='w-1/2 border-solid border-2 border-gray-200'>
           <div className='flex justify-center p-4'>
             <img
@@ -59,48 +63,26 @@ const ProductDetails = ({ product, categoryName, relatedProducts }) => {
             </Button>
           </div>
 
-          <div className='mt-8 flex justify-between'>
-            <Button variant='outline' className='bg-gray-100 p-8'>
+          <div className='mt-8 flex gap-12'>
+            <button
+              variant='outline'
+              className='bg-gray-200 px-8 py-4 flex items-center gap-2 rounded-lg'
+            >
               <FavoriteIcon color='gray' size={28} />
               <span className='text-[18px]'>Add to Favourite</span>
-            </Button>
-            <Button variant='outline' className='bg-[#ff6a19] p-8'>
-              <CartIcon color='#000' size={24} />
+            </button>
+            <button
+              variant='outline'
+              className='bg-[#ff6a19] px-16  py-4 flex items-center gap-2 rounded-lg'
+              onClick={handleAddToCart}
+            >
+              <CartIcon color='white' size={28} />
               <span className='text-[18px] text-white'>Add to Cart</span>
-            </Button>
+            </button>
           </div>
         </section>
       </div>
 
-      {/* <div className='mx-32 my-12'>
-        <h3 className='text-[32px] font-semibold mb-6'>Related Products</h3>
-        <div className='grid grid-cols-4 gap-8'>
-          {relatedProducts.map((relatedProduct) => (
-            <div
-              key={relatedProduct.id}
-              className='border border-gray-200 p-4 rounded-lg shadow-md'
-            >
-              <img
-                src={relatedProduct.images[0]}
-                alt={relatedProduct.productName}
-                className='w-full h-[200px] object-cover rounded-lg'
-              />
-              <h4 className='text-lg font-medium mt-4'>
-                {relatedProduct.productName}
-              </h4>
-              <p className='text-sm text-gray-500 mt-2'>
-                ${relatedProduct.price}/kg
-              </p>
-              <Button
-                variant='outline'
-                className='bg-[#ff6a19] text-white mt-4 w-full'
-              >
-                View Details
-              </Button>
-            </div>
-          ))}
-        </div>
-      </div> */}
       <div>
         <ReletedProduct relatedProducts={relatedProducts} />
       </div>

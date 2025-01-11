@@ -2,15 +2,20 @@ import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import MoreProduct from './moreProduct';
 import { useRouter } from 'next/navigation';
+import { useCart } from '@/pages/api/CartContext';
 
 const ProductSection = ({ selectedCategory }) => {
   const router = useRouter();
+  const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [noMoreProducts, setNoMoreProducts] = useState(false);
+  const handleAddToCart = (product) => {
+    addToCart(product, 1);
+  };
 
   const fetchProducts = async () => {
     try {
@@ -102,7 +107,10 @@ const ProductSection = ({ selectedCategory }) => {
                 ${product.price.toFixed(2)}
               </p>
 
-              <Button className='mt-4 w-full bg-white text-black py-2 rounded-lg hover:bg-[#ff6a19] hover:text-white transition duration-200'>
+              <Button
+                className='mt-4 w-full bg-white text-black py-2 rounded-lg hover:bg-[#ff6a19] hover:text-white transition duration-200'
+                onClick={() => handleAddToCart(product)}
+              >
                 Add to Cart
               </Button>
             </div>

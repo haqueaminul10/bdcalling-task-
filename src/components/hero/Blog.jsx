@@ -1,8 +1,8 @@
 import { Button } from '../ui/button';
 import Image from 'next/image';
-import leaf from '@/components/assets/leaf.png';
+import leaf from '../../../public/assets/leaf.png';
 import BlogCard from '../blog/BlogCard';
-import { blogsData } from '../../../data/inde';
+import { blogsData } from '../../../data';
 
 const Blog = () => {
   return (

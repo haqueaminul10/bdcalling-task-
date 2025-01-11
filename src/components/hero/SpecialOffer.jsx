@@ -1,9 +1,9 @@
-import bg from '@/components/assets/Bg.png';
+import bg from '../../../public/assets/Bg.png';
 import { Button } from '../ui/button';
-import fruit from '@/components/assets/fruit.png';
+import fruit from '../../../public/assets/fruit.png';
 import Image from 'next/image';
-import leaf from '@/components/assets/leaf.png';
-import { discountData } from '../../../data/inde';
+import leaf from '../../../public/assets/leaf.png';
+import { discountData } from '../../../data';
 
 const SpecialOffer = () => {
   return (

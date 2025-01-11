@@ -12,12 +12,19 @@ import { Input } from '@/components/ui/input';
 import FacebookIcon from '@/icon/facebook';
 import GoogleIcon from '@/icon/google';
 import Register from './Register';
+import { useRouter } from 'next/router';
+import OpenEyeIcon from '@/icon/openeye';
+import CloseEyeIcon from '@/icon/closeEye';
 
-const Login = () => {
+const Login = ({ handleLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -41,6 +48,9 @@ const Login = () => {
       if (response.ok) {
         localStorage.setItem('authToken', result.data.token);
         alert('Login successful');
+        setEmail('');
+        setPassword('');
+        setIsOpen(false);
       } else {
         setError(result.message || 'Something went wrong');
       }
@@ -52,7 +62,7 @@ const Login = () => {
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <p>Log In</p>
       </DialogTrigger>
@@ -87,15 +97,27 @@ const Login = () => {
             >
               Password
             </label>
-            <Input
-              id='password'
-              type='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder='Enter your password'
-              className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500'
-              required
-            />
+            <div className='relative mt-1'>
+              <Input
+                id='password'
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder='Enter your password'
+                className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500'
+                required
+              />
+              <div
+                onClick={togglePasswordVisibility}
+                className='absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer'
+              >
+                {!showPassword ? (
+                  <CloseEyeIcon color='black' size={20} />
+                ) : (
+                  <OpenEyeIcon color='black' size={20} />
+                )}
+              </div>
+            </div>
           </div>
           {error && <p className='text-red-500 text-sm'>{error}</p>}
           <DialogFooter>
