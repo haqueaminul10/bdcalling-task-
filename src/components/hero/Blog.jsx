@@ -1,7 +1,9 @@
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import leaf from '@/components/assets/leaf.png';
-import BlogSection from '../blog/BlogSection';
+import BlogCard from '../blog/BlogCard';
+import { blogsData } from '../../../data/inde';
+
 const Blog = () => {
   return (
     <>
@@ -24,7 +26,7 @@ const Blog = () => {
         </div>
       </div>
       <div className='mx-32 my-20'>
-        <BlogSection />
+        <BlogCard blogsData={blogsData} />
       </div>
     </>
   );

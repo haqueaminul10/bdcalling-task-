@@ -3,6 +3,8 @@ import { Button } from '../ui/button';
 import fruit from '@/components/assets/fruit.png';
 import Image from 'next/image';
 import leaf from '@/components/assets/leaf.png';
+import { discountData } from '../../../data/inde';
+
 const SpecialOffer = () => {
   return (
     <div
@@ -27,22 +29,12 @@ const SpecialOffer = () => {
           Discount up to <span className='text-[#ff6a19]'>80% OFF</span>
         </h3>
         <div className='flex  items-center gap-8   w-[80px] h-[122px] my- 6'>
-          <div className='px-5 bg-white'>
-            <h2 className='text-[30px] '>03</h2>
-            <p>Days</p>
-          </div>
-          <div className='px-5 bg-white'>
-            <h2 className='text-[30px] '>18</h2>
-            <p>Hours</p>
-          </div>
-          <div className='px-5 bg-white'>
-            <h2 className='text-[30px] '>54</h2>
-            <p>Min</p>
-          </div>
-          <div className='px-5 bg-white'>
-            <h2 className='text-[30px] '>21</h2>
-            <p>Second</p>
-          </div>
+          {discountData.map((item) => (
+            <div key={item.id} className='px-5 bg-white'>
+              <h2 className='text-[30px] '>{item.time}</h2>
+              <p>{item.label}</p>
+            </div>
+          ))}
         </div>
         <Button
           variant='outline'

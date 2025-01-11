@@ -33,7 +33,7 @@ const ProductSection = ({ selectedCategory }) => {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [selectedCategory]);
 
   useEffect(() => {
     const filteredProducts = selectedCategory

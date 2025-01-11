@@ -4,7 +4,9 @@ import Link from 'next/link';
 import CartIcon from '@/icon/cart';
 import FavoriteIcon from '@/icon/favouriteIcon';
 import SignIn from '../auth/index';
+import { useRouter } from 'next/router';
 const Navbar = () => {
+  const router = useRouter();
   const menu = [
     { name: 'Home', route: '/' },
     { name: 'Shop', route: '/shop' },
@@ -25,10 +27,17 @@ const Navbar = () => {
           </div>
           <h1 className='text-2xl font-bold'>Fresh Harvests</h1>
         </section>
-        <section className='flex items-center gap-3'>
+        <section className='flex items-center gap-4 justify-center'>
           {menu.length > 0 &&
             menu.map((item, index) => (
-              <div key={index}>
+              <div
+                key={index}
+                className={`border-b-[3px] transition-all duration-300 ${
+                  router.pathname === item.route
+                    ? 'border-green-600'
+                    : 'border-transparent hover:border-green-600'
+                }`}
+              >
                 <Link href={item.route}>{item.name}</Link>
               </div>
             ))}
