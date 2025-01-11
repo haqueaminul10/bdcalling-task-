@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import MoreProduct from './moreProduct';
 import { useRouter } from 'next/navigation';
+
 const ProductSection = ({ selectedCategory }) => {
   const router = useRouter();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [displayedProducts, setDisplayedProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [noMoreProducts, setNoMoreProducts] = useState(false);
 
   const fetchProducts = async () => {
     try {
@@ -31,9 +35,34 @@ const ProductSection = ({ selectedCategory }) => {
     fetchProducts();
   }, []);
 
-  const filteredProducts = selectedCategory
-    ? products.filter((product) => product.categoryId === selectedCategory.id)
-    : products;
+  useEffect(() => {
+    const filteredProducts = selectedCategory
+      ? products.filter((product) => product.categoryId === selectedCategory.id)
+      : products;
+
+    setDisplayedProducts(filteredProducts.slice(0, 8));
+  }, [products, selectedCategory]);
+
+  const loadMoreProducts = () => {
+    const filteredProducts = selectedCategory
+      ? products.filter((product) => product.categoryId === selectedCategory.id)
+      : products;
+
+    const nextPageProducts = filteredProducts.slice(
+      currentPage * 8,
+      (currentPage + 1) * 8
+    );
+
+    if (nextPageProducts.length > 0) {
+      setDisplayedProducts((prevProducts) => [
+        ...prevProducts,
+        ...nextPageProducts,
+      ]);
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else {
+      setNoMoreProducts(true);
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -46,8 +75,8 @@ const ProductSection = ({ selectedCategory }) => {
   return (
     <>
       <div className='grid grid-cols-4 gap-8 mx-32 my-16'>
-        {filteredProducts.length > 0 &&
-          filteredProducts.slice(0, 8).map((product) => (
+        {displayedProducts.length > 0 &&
+          displayedProducts.map((product) => (
             <div
               key={product.id}
               className='product-card bg-white p-4 rounded-lg shadow-lg border border-gray-200 w-[282px] h-[380px]'
@@ -80,7 +109,10 @@ const ProductSection = ({ selectedCategory }) => {
           ))}
       </div>
       <div>
-        <MoreProduct />
+        <MoreProduct
+          noMoreProducts={noMoreProducts}
+          loadMoreProducts={loadMoreProducts}
+        />
       </div>
     </>
   );
